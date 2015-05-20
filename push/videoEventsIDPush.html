@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Start and stop videos from the website using their component ID
+-->
+<html>
+<head>
+<script src="../embedded-player-sdk.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<h1><div id="experienceTitle"></div></h1>
+<br/>
+<h1>Push by ID</h1>
+<br/>
+<button onclick="startNinjaVideo()">Start Ninja Video</button>
+<button onclick="stopNinjaVideo()">Stop Ninja Video</button>
+<button onclick="startChickenVideo()">Start Chicken Video</button>
+<button onclick="stopChickenVideo()">Stop Chicken Video</button>
+<div>
+    <br/>
+</div>
+<div style="position:relative;width:auto;padding:0 0 75.00%;height:0;top:0;left:0;bottom:0;right:0;margin:0;border:0 none">
+	<iframe src="https://dev4-view.cerosdev.com/ceros-qa/video-push" style="position:absolute;width:1024px;height:100%;top:0;left:0;bottom:0;right:0;margin:0;padding:0;border:0 none" frameborder="0" class="ceros-experience"></iframe>
+</div>
+
+</body>
+
+<script>
+    CerosSDK.findExperience('issue-551adc356efd2')
+      .done(function(experience){
+      	  $("#experienceTitle").html(experience.getTitle());
+      });
+      
+    function startNinjaVideo() {
+    CerosSDK.findExperience('issue-551adc356efd2')
+      .done(function(experience){
+      	  var ninjaVideo = experience.findComponentById('5514268e19091');
+          ninjaVideo.startVideo();
+          
+    })};
+
+    function stopNinjaVideo() {
+    CerosSDK.findExperience('issue-551adc356efd2')
+      .done(function(experience){
+      	  var ninjaVideo = experience.findComponentById('5514268e19091');
+          ninjaVideo.stopVideo();
+          
+    })};
+
+    function startChickenVideo() {
+    CerosSDK.findExperience('issue-551adc356efd2')
+      .done(function(experience){
+      	  var chickenVideo = experience.findComponentById('551adff6cca7e');
+          chickenVideo.startVideo();
+          
+    })};
+
+    function stopChickenVideo() {
+    CerosSDK.findExperience('issue-551adc356efd2')
+      .done(function(experience){
+      	  var chickenVideo = experience.findComponentById('551adff6cca7e');
+          chickenVideo.stopVideo();
+          
+    })};
+
+</script>

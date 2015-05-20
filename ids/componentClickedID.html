@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+<head>
+<script src="../embedded-player-sdk.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<h1><div id="experienceTitle"></div></h1>
+
+<div id="catImage"></div>
+
+
+
+<div style="position:relative;width:auto;padding:0 0 75.00%;height:0;top:0;left:0;bottom:0;right:0;margin:0;border:0 none">
+	<iframe src="https://dev4-view.cerosdev.com/ceros-qa/component-clicked-id" style="position:absolute;width:1024px;height:100%;top:0;left:0;bottom:0;right:0;margin:0;padding:0;border:0 none" frameborder="0" class="ceros-experience"></iframe>
+</div>
+
+</body>
+
+<script>
+CerosSDK.findExperience('issue-5519902963808')
+      .done(function(experience){
+      	  $("#experienceTitle").html(experience.getTitle());
+        
+         var showID = experience.findComponentById('551421392a25e');
+         showID.subscribe(CerosSDK.EVENTS.COMPONENT_CLICKED, function(component) {
+            $("#catImage").html("<img src='https://wordandimage.files.wordpress.com/2008/04/pctechsupportcat.jpg?w=900&h=600'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var hideID = experience.findComponentById('551421f82a261');
+         hideID.subscribe(CerosSDK.EVENTS.COMPONENT_CLICKED, function(component) {
+            $("#catImage").html("<img src='http://www.lol-cat.org/wp-content/uploads/2013/03/47-lolcat-funny-images-of-cats-with-COMPUTER.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+      
+        var toggleID = experience.findComponentById('5514222a2a26b');
+         toggleID.subscribe(CerosSDK.EVENTS.COMPONENT_CLICKED, function(component) {
+            $("#catImage").html("<img src='http://itsfuriousbalancing.com/wp-content/uploads/2008/02/kkkkkkkkkk.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+      });
+</script>
+</html>

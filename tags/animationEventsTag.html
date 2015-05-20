@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+<head>
+<script src="../embedded-player-sdk.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<h1><div id="experienceTitle"></div></h1>
+
+<div id="eventFlasher"></div>
+
+
+
+<div style="position:relative;width:auto;padding:0 0 75.00%;height:0;top:0;left:0;bottom:0;right:0;margin:0;border:0 none">
+	<iframe src="https://dev4-view.cerosdev.com/ceros-qa/animation-events-tags" style="position:absolute;width:1024px;height:100%;top:0;left:0;bottom:0;right:0;margin:0;padding:0;border:0 none" frameborder="0" class="ceros-experience"></iframe>
+</div>
+
+</body>
+
+<script>
+CerosSDK.findExperience('issue-55160985b4a1a')
+      .done(function(experience){
+      	  $("#experienceTitle").html(experience.getTitle());
+        
+        var animationOneStart = experience.findComponentsByTag('animationone');
+         animationOneStart.subscribe(CerosSDK.EVENTS.ANIMATION_STARTED, function(component) {
+            $("#eventFlasher").html("<img src='http://www.lol-cat.org/wp-content/uploads/2013/03/47-lolcat-funny-images-of-cats-with-COMPUTER.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var animationOneEnd = experience.findComponentsByTag('animationone');
+        animationOneEnd.subscribe(CerosSDK.EVENTS.ANIMATION_ENDED, function(component) {
+            $("#eventFlasher").html("<img src='https://wordandimage.files.wordpress.com/2008/04/pctechsupportcat.jpg?w=900&h=600'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var animationTwoStart = experience.findComponentsByTag('animationtwo');
+        animationTwoStart.subscribe(CerosSDK.EVENTS.ANIMATION_STARTED, function(component) {
+            $("#eventFlasher").html("<img src='http://www.lol-cat.org/wp-content/uploads/2013/03/47-lolcat-funny-images-of-cats-with-COMPUTER.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var animationTwoEnd = experience.getComponentsByTag('animationtwo');
+        animationTwoEnd.subscribe(CerosSDK.EVENTS.ANIMATION_ENDED, function(component) {
+            $("#eventFlasher").html("<img src='https://wordandimage.files.wordpress.com/2008/04/pctechsupportcat.jpg?w=900&h=600'>").fadeIn(2000).fadeOut(4000);
+        });
+       
+        var clickNinja = experience.findComponentsByTag('click');
+        clickNinja.subscribe(CerosSDK.EVENTS.COMPONENT_CLICKED, function(component) {
+            $("#eventFlasher").html("I got clicked").fadeIn(2000).fadeOut(4000);
+        });
+      });
+</script>
+</html>

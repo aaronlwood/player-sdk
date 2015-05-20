@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<!--
+Listens for the tags show,hide,toggle for component clicks
+-->
+
+<html>
+<head>
+<script src="../embedded-player-sdk.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+</head>
+<body>
+<h1><div id="experienceTitle"></div></h1>
+
+<div id="catImage"></div>
+<div id="componentName"></div>
+
+
+<div style="position:relative;width:auto;padding:0 0 75.00%;height:0;top:0;left:0;bottom:0;right:0;margin:0;border:0 none">
+	<iframe src="https://dev4-view.cerosdev.com/ceros-qa/layer-events-id" style="position:absolute;width:1024px;height:100%;top:0;left:0;bottom:0;right:0;margin:0;padding:0;border:0 none" frameborder="0" class="ceros-experience"></iframe>
+</div>
+
+</body>
+
+<script>
+CerosSDK.findExperience('issue-5519901720ad6')
+      .done(function(experience){
+      	  $("#experienceTitle").html(experience.getTitle());
+        
+         var showID = experience.findLayerById('551421392a25a');
+         showID.subscribe(CerosSDK.EVENTS.LAYER_SHOWN, function(component) {
+            $("#catImage").html("<img src='https://wordandimage.files.wordpress.com/2008/04/pctechsupportcat.jpg?w=900&h=600'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var hideID = experience.findLayerById('551421392a25a');
+         hideID.subscribe(CerosSDK.EVENTS.LAYER_HIDDEN, function(component) {
+            $("#catImage").html("<img src='http://www.lol-cat.org/wp-content/uploads/2013/03/47-lolcat-funny-images-of-cats-with-COMPUTER.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+      
+        var toggleShowID = experience.findLayerById('5514222a2a264');
+         toggleShowID.subscribe(CerosSDK.EVENTS.LAYER_HIDDEN, function(component) {
+            $("#catImage").html("<img src='https://wordandimage.files.wordpress.com/2008/04/pctechsupportcat.jpg?w=900&h=600'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+        var toggleHideID = experience.findLayerById('5514222a2a264');
+         toggleHideID.subscribe(CerosSDK.EVENTS.LAYER_SHOWN, function(component) {
+            $("#catImage").html("<img src='http://www.lol-cat.org/wp-content/uploads/2013/03/47-lolcat-funny-images-of-cats-with-COMPUTER.jpg'>").fadeIn(2000).fadeOut(4000);
+        });
+        
+      });
+</script>
+</html>
